@@ -5,7 +5,7 @@ with open("word_list.txt") as f:
     word_list = [word for word in f.read().splitlines() if len(word) == 5]
 
 # Define the number of guesses you want to make
-num_guesses = 1000
+num_guesses = 5
 
 # Define a dictionary to keep track of the probability of each word being correct
 word_probabilities = {word: 1/len(word_list) for word in word_list}
@@ -18,18 +18,16 @@ def get_feedback(guess, word):
             feedback[i] = guess[i]
     return " ".join(feedback)
 
-# Loop until the user exits the program
-while True:
+# Loop until the user runs out of guesses
+for i in range(num_guesses):
     # Get the word with the highest probability of being correct
     guess = max(word_probabilities, key=word_probabilities.get)
     
     # Print the guess
-    print("Guess: {}".format(guess))
+    print("Guess {}: {}".format(i+1, guess))
     
     # Get feedback on the guess
     feedback = input("Enter feedback on the guess (e.g. 'a _ _ _ e' means the first and fifth letters are correct): ")
-    if feedback == "":
-        break
     
     # Convert feedback to a list of letters
     feedback = feedback.split()
@@ -56,3 +54,5 @@ while True:
     if feedback == [guess[i] for i in range(len(guess))]:
         print("Correct!")
         break
+else:
+    print("OOPS ran out of guesses, maybe you get it right tomorrow ;)")
