@@ -27,10 +27,10 @@ for i in range(num_guesses):
     print("Guess {}: {}".format(i+1, guess))
     
     # Get feedback on the guess
-    feedback = input("Enter feedback on the guess (e.g. 'a _ _ _ e' means the first and fifth letters are correct): ")
+    feedback = input("Enter feedback on the guess (e.g. 'a,_,-,_,-' means the first letter is 'a'): ")
     
     # Convert feedback to a list of letters
-    feedback = feedback.split()
+    feedback = feedback.split(",")
     
     # Adjust the probabilities of each word based on the feedback
     for word in word_probabilities:
